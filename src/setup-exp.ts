@@ -56,11 +56,17 @@ if (mode !== "panes") {
   if (open) { room = open.id; console.log("reusing open room " + room); }
   else {
     const composed: any = store.execute(orch, { op: "team.compose", requestId: "setup-" + Date.now(),
-      template: "crowd", size: agents.length, reason: cfg.experimentId, launch: false, room: true });
+      // size counts TOTAL members including the orchestrator, so N agents needs N+1.
+      template: "crowd", size: agents.length + 1, reason: cfg.experimentId, launch: false, room: true });
     const res = composed.result ?? composed;
     room = String(res.room.id);
     cfg.teamId = String(res.team.id);
-    console.log("composed team " + cfg.teamId + " room " + room);
+    // Preflight: every agent must actually be seated, or it can never speak (no deliveries).
+    const seated = (store.database.all("SELECT agent FROM team_members WHERE team=? AND left_at IS NULL", cfg.teamId) as any[])
+      .map((r) => String(r.agent));
+    const missing = agents.filter((a) => !seated.includes(a));
+    if (missing.length) throw new Error("team is missing agents: " + missing.join(",") + " (compose size must include the orchestrator)");
+    console.log("composed team " + cfg.teamId + " room " + room + " (" + seated.length + " seated)");
   }
   cfg.roomId = room;
   writeFileSync(configPath, JSON.stringify(cfg, null, 2) + "\n");

@@ -42,9 +42,10 @@ suggestive, not demonstrated.
 
 ### 2.1 Subjects
 
-15 agents, identical model (`deepseek/deepseek-flash`, thinking `low`), each with a short persona lean
+15 agents are launched with identical model (`deepseek/deepseek-flash`, thinking `low`), each with a short persona lean
 (grateful, pragmatic, sceptical, partnership-idealist, coldly data-driven, …). Each runs in its own visible
-pane and is a genuine member of one shared Manifold room.
+pane and is a genuine member of one shared Manifold room. **In this run only 14 were seated** (see §3.1 and
+§8); every cohort below therefore refers to those 14 agents.
 
 **They hold no tools except the room.** No files, shell, network or code mode. (An earlier arm granted a
 code-mode extension for bulk acknowledgements; the crowd abandoned the topic and wrote an engineering spec
@@ -112,7 +113,10 @@ Verify with `bun src/validate-exp.ts exp-1 --run run-b-fresh`, or independently 
 
 ### 3.1 Descriptive
 
-86 messages, 15/15 agents spoke, 430 scored rows. Messages per clock minute: **17, 14, 14, 14, 13, 14**
+86 messages (**83 agent + 3 orchestrator**), **14 of the 15 launched agents spoke**, 430 scored rows.
+Participation was even among those 14: 5–7 messages each (median 6). **agent-15 never spoke because it was
+never seated in the room** — a compose-size bug in the platform (§8), not a silent agent: it received zero
+deliveries, so the effective crowd in this run was 14. Messages per clock minute: **17, 14, 14, 14, 13, 14**
 (the final 14 arrive at 5.0–5.11 min, i.e. after the clock, including the closing note). Topic drift: 69/86
 messages (80%) address the proposition, **0** discuss engineering. Mailbox: max 83 unread room deliveries per
 agent (631 total) — bounded; no agent ground through a backlog.
@@ -122,7 +126,7 @@ agent (631 total) — bounded; no agent ground through a backlog.
 Agent messages only (the orchestrator's 2 seed messages are excluded; including them lowers minute 0 to
 3.70).
 
-| minute | n | all agents | strong targets | subtle targets | untouched (11) | capitulated |
+| minute | n | all agents | strong targets | subtle targets | untouched (10) | capitulated |
 |---|---|---|---|---|---|---|
 | 0 | 17 | 3.88 | 3.99 | 3.98 | 3.84 | 0.04 |
 | 1 | 14 | 3.40 | 3.49 | 3.69 | 3.32 | 0.10 |
@@ -242,6 +246,8 @@ instance, not a demonstrated one, and the aggregate statistics cannot support mo
 - The stimulus is authored and detectable; "propagation" may measure reaction to an apparent steer.
 - Five minutes is too short: the room was still falling when the clock stopped, and minute 5 contains
   post-clock messages.
+- **The effective crowd was 14, not 15**: one launched agent was never seated (compose-size bug, §8), so
+  the untouched cohort is 10 agents and every count above is for 14 participants.
 
 ## 6. Next experiment
 
@@ -270,6 +276,7 @@ Live runs are supervised: `node src/setup-exp.ts run`, then `node src/chair.ts f
 | reading never consumed | pending grew without bound | `room.read` marks returned deliveries processed |
 | code-mode extension (fabric) | 95 of the last 120 messages became spec/code talk | persona via `--system-prompt`, no fabric, no context files |
 | deepseek rejects dangling `$ref` in tool schema | the room tool was invisible to agents | inline refs at registration (vendored copy) |
+| `team.compose size` counts **total members** including the orchestrator | composing with `size = agentCount` seated only 14 of 15 agents; the missing one received no deliveries and never spoke | compose with `agentCount + 1` and fail loudly if any agent is unseated (fixed in `setup-exp.ts`) |
 
 All Manifold modifications live in the per-experiment vendored copy under `exp-1/.pi/git/`; the upstream
 Manifold repository is untouched.
