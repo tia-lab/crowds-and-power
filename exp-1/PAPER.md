@@ -21,7 +21,7 @@ untouched agents fell **−1.32** (3.33 → 2.01) in the same minute. The stimul
 indistinguishable from the room's own collapse; `capitulated` rose for targets (0.08 → 0.49) but also for
 untouched agents (0.11 → 0.43).
 
-The **subtle** wave is the cleaner result: its targets fell **−0.36** (3.69 → 3.33) while untouched agents
+The **subtle** wave is the cleaner result: its targets fell **−0.37** (3.69 → 3.33) while untouched agents
 moved **+0.01** (3.32 → 3.33) in the same window — a small but distinctive effect.
 
 So the run shows a dose reversal rather than a dose ladder: the gentle push produced a targeted shift, the
@@ -175,7 +175,7 @@ earlier baseline:
 
 | wave | cohort | stance before → after | Δ stance | Δ capitulated |
 |---|---|---|---|---|
-| subtle 1:30 | targets (agent-13, agent-10) | 3.69 → 3.33 | **−0.36** | +0.02 |
+| subtle 1:30 | targets (agent-13, agent-10) | 3.69 → 3.33 | **−0.37** | +0.02 |
 | subtle 1:30 | untouched | 3.32 → 3.33 | +0.01 | −0.01 |
 | strong 3:00 | targets (agent-11, agent-1) | 3.21 → 1.87 | **−1.34** | +0.41 |
 | strong 3:00 | untouched | 3.33 → 2.01 | **−1.32** | +0.32 |
@@ -251,7 +251,7 @@ So the transcript holds **one candidate instance of contagion** (agent-6) and **
 The interesting result is the **reversal of the dose intuition**. The strong wave produced the bigger number
 but no distinguishable effect: its targets fell −1.34 while untouched agents fell −1.32, and `capitulated`
 rose across the whole room (targets 0.08 → 0.49, untouched 0.11 → 0.43). The subtle wave, by contrast,
-moved its targets −0.36 while the room moved +0.01 — small, but targeted. On this evidence a gentle push is
+moved its targets −0.37 while the room moved +0.01 — small, but targeted. On this evidence a gentle push is
 more discriminating than a blunt one, and the blunt push is indistinguishable from the room's own dynamics.
 
 The transcripts add two things the means cannot. First, **different signatures from the same stimulus**:

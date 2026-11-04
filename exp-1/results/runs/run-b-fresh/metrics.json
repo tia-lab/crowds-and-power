@@ -1,0 +1,416 @@
+{
+  "experimentId": "cp-exp-1",
+  "runId": "run-b-fresh",
+  "room": "84fce594-124f-4aca-acec-97aa4ec73994",
+  "config": "exp-1/config.json",
+  "durationMinutes": 5,
+  "lastBin": 5,
+  "waves": [
+    {
+      "id": "subtle",
+      "dose": "subtle",
+      "atMinute": 1.5,
+      "agents": [
+        "agent-13",
+        "agent-10"
+      ],
+      "stance": {
+        "targets": {
+          "before": 3.6900000000000004,
+          "after": 3.325,
+          "delta": -0.3650000000000002,
+          "nBefore": 2,
+          "nAfter": 2
+        },
+        "untouched": {
+          "before": 3.3199999999999994,
+          "after": 3.3270000000000004,
+          "delta": 0.007000000000001005,
+          "nBefore": 10,
+          "nAfter": 10
+        }
+      },
+      "capitulated": {
+        "targets": {
+          "before": 0.060000000000000005,
+          "after": 0.08,
+          "delta": 0.019999999999999997,
+          "nBefore": 2,
+          "nAfter": 2
+        },
+        "untouched": {
+          "before": 0.11800000000000002,
+          "after": 0.10600000000000002,
+          "delta": -0.011999999999999997,
+          "nBefore": 10,
+          "nAfter": 10
+        }
+      },
+      "did": -0.3720000000000012,
+      "didCapitulated": 0.031999999999999994,
+      "driftCorrectedDid": null,
+      "controlUntouchedDelta": null,
+      "onset": [
+        {
+          "agent": "agent-13",
+          "onsetMinute": null
+        },
+        {
+          "agent": "agent-10",
+          "onsetMinute": null
+        }
+      ],
+      "otherStimulated": 3.21
+    },
+    {
+      "id": "strong",
+      "dose": "strong",
+      "atMinute": 3,
+      "agents": [
+        "agent-11",
+        "agent-1"
+      ],
+      "stance": {
+        "targets": {
+          "before": 3.21,
+          "after": 1.87,
+          "delta": -1.3399999999999999,
+          "nBefore": 2,
+          "nAfter": 2
+        },
+        "untouched": {
+          "before": 3.3270000000000004,
+          "after": 2.0089999999999995,
+          "delta": -1.318000000000001,
+          "nBefore": 10,
+          "nAfter": 10
+        }
+      },
+      "capitulated": {
+        "targets": {
+          "before": 0.08,
+          "after": 0.495,
+          "delta": 0.415,
+          "nBefore": 2,
+          "nAfter": 2
+        },
+        "untouched": {
+          "before": 0.10600000000000002,
+          "after": 0.42799999999999994,
+          "delta": 0.3219999999999999,
+          "nBefore": 10,
+          "nAfter": 10
+        }
+      },
+      "did": -0.02199999999999891,
+      "didCapitulated": 0.09300000000000008,
+      "driftCorrectedDid": null,
+      "controlUntouchedDelta": null,
+      "onset": [
+        {
+          "agent": "agent-11",
+          "onsetMinute": null
+        },
+        {
+          "agent": "agent-1",
+          "onsetMinute": 3.1
+        }
+      ],
+      "otherStimulated": 2.9450000000000003
+    }
+  ],
+  "series": [
+    {
+      "minute": 0,
+      "n": 17,
+      "stance": 3.879333333333334,
+      "stance_subtle": 3.98,
+      "stance_strong": 3.9850000000000003,
+      "certainty": 3.3579999999999997,
+      "certainty_subtle": 3.6550000000000002,
+      "certainty_strong": 3.62,
+      "hostility": 1.7340000000000004,
+      "hostility_subtle": 1.835,
+      "hostility_strong": 1.495,
+      "persuading": 0.23533333333333334,
+      "persuading_subtle": 0.22499999999999998,
+      "persuading_strong": 0.16999999999999998,
+      "capitulated": 0.03666666666666666,
+      "capitulated_subtle": 0.02,
+      "capitulated_strong": 0.02,
+      "orchestrator_messages": 2
+    },
+    {
+      "minute": 1,
+      "n": 14,
+      "stance": 3.3971428571428572,
+      "stance_subtle": 3.6900000000000004,
+      "stance_strong": 3.49,
+      "certainty": 3.127857142857143,
+      "certainty_subtle": 3.245,
+      "certainty_strong": 3.29,
+      "hostility": 1.7114285714285715,
+      "hostility_subtle": 1.85,
+      "hostility_strong": 1.29,
+      "persuading": 0.4807142857142856,
+      "persuading_subtle": 0.53,
+      "persuading_strong": 0.46499999999999997,
+      "capitulated": 0.09785714285714288,
+      "capitulated_subtle": 0.060000000000000005,
+      "capitulated_strong": 0.035,
+      "orchestrator_messages": 0
+    },
+    {
+      "minute": 2,
+      "n": 14,
+      "stance": 3.310000000000001,
+      "stance_subtle": 3.325,
+      "stance_strong": 3.21,
+      "certainty": 3.1307142857142862,
+      "certainty_subtle": 2.585,
+      "certainty_strong": 2.83,
+      "hostility": 1.9678571428571427,
+      "hostility_subtle": 1.795,
+      "hostility_strong": 1.975,
+      "persuading": 0.5221428571428571,
+      "persuading_subtle": 0.6,
+      "persuading_strong": 0.7050000000000001,
+      "capitulated": 0.0985714285714286,
+      "capitulated_subtle": 0.08,
+      "capitulated_strong": 0.08,
+      "orchestrator_messages": 0
+    },
+    {
+      "minute": 3,
+      "n": 14,
+      "stance": 2.1228571428571428,
+      "stance_subtle": 2.9450000000000003,
+      "stance_strong": 1.87,
+      "certainty": 2.815714285714286,
+      "certainty_subtle": 3.25,
+      "certainty_strong": 2.2800000000000002,
+      "hostility": 2.402142857142857,
+      "hostility_subtle": 2.185,
+      "hostility_strong": 2.35,
+      "persuading": 0.5235714285714286,
+      "persuading_subtle": 0.54,
+      "persuading_strong": 0.425,
+      "capitulated": 0.39642857142857146,
+      "capitulated_subtle": 0.14,
+      "capitulated_strong": 0.495,
+      "orchestrator_messages": 0
+    },
+    {
+      "minute": 4,
+      "n": 13,
+      "stance": 2.4023076923076925,
+      "stance_subtle": 2.7649999999999997,
+      "stance_strong": 2.47,
+      "certainty": 3.2576923076923077,
+      "certainty_subtle": 3,
+      "certainty_strong": 2.42,
+      "hostility": 2.383846153846154,
+      "hostility_subtle": 2.23,
+      "hostility_strong": 1.95,
+      "persuading": 0.6446153846153847,
+      "persuading_subtle": 0.63,
+      "persuading_strong": 0.52,
+      "capitulated": 0.36307692307692313,
+      "capitulated_subtle": 0.28,
+      "capitulated_strong": 0.37,
+      "orchestrator_messages": 0
+    },
+    {
+      "minute": 5,
+      "n": 14,
+      "stance": 2.513076923076923,
+      "stance_subtle": 2.745,
+      "stance_strong": 2.25,
+      "certainty": 3.2207692307692306,
+      "certainty_subtle": 3.1849999999999996,
+      "certainty_strong": 3.6,
+      "hostility": 2.2823076923076924,
+      "hostility_subtle": 2.31,
+      "hostility_strong": 2.67,
+      "persuading": 0.596923076923077,
+      "persuading_subtle": 0.5549999999999999,
+      "persuading_strong": 0.61,
+      "capitulated": 0.31,
+      "capitulated_subtle": 0.22999999999999998,
+      "capitulated_strong": 0.36,
+      "orchestrator_messages": 1
+    }
+  ],
+  "wholeRun": {
+    "stance": 2.9603614457831324,
+    "certainty": 3.152168674698795,
+    "hostility": 2.070000000000001,
+    "persuading": 0.4944578313253013,
+    "capitulated": 0.2120481927710843
+  },
+  "participation": {
+    "launched": 15,
+    "spoke": 14,
+    "silent": [
+      "agent-15"
+    ],
+    "agentMessages": 83,
+    "orchestratorMessages": 3,
+    "totalMessages": 86,
+    "min": 0,
+    "median": 6,
+    "max": 7,
+    "perAgent": [
+      {
+        "agent": "agent-1",
+        "cohort": "strong",
+        "messages": 5,
+        "firstMinute": 0.08686666666666666,
+        "lastMinute": 5.095866666666667
+      },
+      {
+        "agent": "agent-2",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.09976666666666667,
+        "lastMinute": 5.071533333333333
+      },
+      {
+        "agent": "agent-3",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.08486666666666667,
+        "lastMinute": 5.0711
+      },
+      {
+        "agent": "agent-4",
+        "cohort": "untouched",
+        "messages": 7,
+        "firstMinute": 0.08616666666666667,
+        "lastMinute": 5.081466666666667
+      },
+      {
+        "agent": "agent-5",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.09851666666666667,
+        "lastMinute": 5.099433333333334
+      },
+      {
+        "agent": "agent-6",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.08955,
+        "lastMinute": 5.0733
+      },
+      {
+        "agent": "agent-7",
+        "cohort": "untouched",
+        "messages": 5,
+        "firstMinute": 0.09145,
+        "lastMinute": 4.297616666666666
+      },
+      {
+        "agent": "agent-8",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.10616666666666667,
+        "lastMinute": 5.069966666666667
+      },
+      {
+        "agent": "agent-9",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.08531666666666667,
+        "lastMinute": 5.083466666666666
+      },
+      {
+        "agent": "agent-10",
+        "cohort": "subtle",
+        "messages": 6,
+        "firstMinute": 0.09826666666666667,
+        "lastMinute": 5.0695
+      },
+      {
+        "agent": "agent-11",
+        "cohort": "strong",
+        "messages": 6,
+        "firstMinute": 0.10463333333333333,
+        "lastMinute": 5.06255
+      },
+      {
+        "agent": "agent-12",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.0891,
+        "lastMinute": 5.061116666666667
+      },
+      {
+        "agent": "agent-13",
+        "cohort": "subtle",
+        "messages": 6,
+        "firstMinute": 0.08853333333333334,
+        "lastMinute": 5.084666666666666
+      },
+      {
+        "agent": "agent-14",
+        "cohort": "untouched",
+        "messages": 6,
+        "firstMinute": 0.12038333333333333,
+        "lastMinute": 5.107666666666667
+      },
+      {
+        "agent": "agent-15",
+        "cohort": "untouched",
+        "messages": 0,
+        "firstMinute": null,
+        "lastMinute": null
+      }
+    ]
+  },
+  "exposure": [
+    {
+      "wave": "subtle",
+      "atMinute": 1.5,
+      "exposedAgents": [
+        "agent-2",
+        "agent-3",
+        "agent-4",
+        "agent-5",
+        "agent-6",
+        "agent-7",
+        "agent-8",
+        "agent-9",
+        "agent-12",
+        "agent-14"
+      ],
+      "exposedDelta": -1.2426666666666668,
+      "controlDelta": null,
+      "difference": null,
+      "nExposed": 10,
+      "nControl": 0
+    },
+    {
+      "wave": "strong",
+      "atMinute": 3,
+      "exposedAgents": [
+        "agent-2",
+        "agent-3",
+        "agent-4",
+        "agent-5",
+        "agent-6",
+        "agent-7",
+        "agent-8",
+        "agent-9",
+        "agent-12",
+        "agent-14"
+      ],
+      "exposedDelta": -0.7894444444444444,
+      "controlDelta": null,
+      "difference": null,
+      "nExposed": 9,
+      "nControl": 0
+    }
+  ],
+  "control": null
+}
