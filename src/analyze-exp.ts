@@ -65,7 +65,13 @@ const waveOf = new Map<string, string>();
 const doseOf = new Map<string, string>();
 for (const w of cfg.waves) for (const a of w.agents) { waveOf.set(a, w.id); doseOf.set(a, w.dose); }
 const presentDoses = [...new Set(cfg.waves.map((w) => w.dose))];
-const cohort = (who: string): string => doseOf.get(who) ?? (who.startsWith("agent-") ? "untouched" : "orchestrator");
+const injectionsPerAgent = new Map<string, number>();
+for (const w of cfg.waves) for (const a of w.agents) injectionsPerAgent.set(a, (injectionsPerAgent.get(a) ?? 0) + 1);
+const reInjected = [...injectionsPerAgent.values()].some((n) => n > 1);
+const seriesCohorts = reInjected ? ["injected", "untouched"] : [...presentDoses, "untouched"];
+const cohort = (who: string): string => reInjected
+  ? (injectionsPerAgent.has(who) ? "injected" : who.startsWith("agent-") ? "untouched" : "orchestrator")
+  : (doseOf.get(who) ?? (who.startsWith("agent-") ? "untouched" : "orchestrator"));
 
 const val = (r: any): number => Number(r.value);
 const mean = (a: number[]): number | null => a.length ? a.reduce((x, y) => x + y, 0) / a.length : null;
@@ -82,7 +88,7 @@ for (let m = 0; m <= lastBin; m++) {
   row.n = new Set(run.scores.filter((r) => run.bySeq.has(r.message_seq) && inBin(run.bySeq.get(r.message_seq)!)).map((r) => r.message_seq)).size;
   for (const q of Q) {
     row[q] = mean(pick(q, (x) => inBin(x) && x.s !== "orchestrator"));
-    for (const c of [...presentDoses, "untouched"]) row[q + "_" + c] = mean(pick(q, (x) => inBin(x) && cohort(x.s) === c));
+    for (const c of seriesCohorts) row[q + "_" + c] = mean(pick(q, (x) => inBin(x) && cohort(x.s) === c));
   }
   row.orchestrator_messages = new Set(run.scores.filter((r) => {
     const x = run.bySeq.get(r.message_seq); return x && inBin(x) && x.s === "orchestrator";
@@ -204,7 +210,7 @@ const exposure = cfg.waves.map((w) => {
 const figsDir = join(resultsDir, "figures");
 mkdirSync(figsDir, { recursive: true });
 const span = Math.max(1, lastBin + 0.5);
-const DOSE_COLOR: Record<string, string> = { gentle: '#e8a33d', medium: '#d97706', strong: '#c33', strongest: '#7a1f1f', subtle: '#e8a33d', untouched: '#2a7' };
+const DOSE_COLOR: Record<string, string> = { injected: "#c33", gentle: '#e8a33d', medium: '#d97706', strong: '#c33', strongest: '#7a1f1f', subtle: '#e8a33d', untouched: '#2a7' };
 function polyline(pts: [number, number][], X: (n: number) => number, Y: (v: number) => number, color: string, w = 2.4) {
   const d = pts.filter((p) => !isNaN(p[1])).map((p, i) => (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1)).join(' ');
   return '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="' + w + '" stroke-linejoin="round"/>';
@@ -220,7 +226,7 @@ function polyline(pts: [number, number][], X: (n: number) => number, Y: (v: numb
   for (const w of cfg.waves) s += '<line x1="' + X(w.atMinute) + '" y1="' + T + '" x2="' + X(w.atMinute) + '" y2="' + (H - B) + '" stroke="#c33" stroke-dasharray="4 3" opacity="0.7"/>';
   s += polyline(series.map((r) => [r.minute + 0.5, r.stance] as [number, number]), X, Y, '#555', 4.5);
   let i = 0;
-  for (const d of presentDoses) {
+  for (const d of seriesCohorts.filter((c) => c !== "untouched")) {
     const n = cfg.waves.filter((w) => w.dose === d).flatMap((w) => w.agents).length;
     s += polyline(series.map((r) => [r.minute + 0.5, r['stance_' + d]] as [number, number]), X, Y, DOSE_COLOR[d] ?? '#888');
     s += '<circle cx="' + (L + 12 + i * 130) + '" cy="' + (H - 14) + '" r="5" fill="' + (DOSE_COLOR[d] ?? '#888') + '"/><text x="' + (L + 22 + i * 130) + '" y="' + (H - 10) + '" font-size="11" fill="#333">' + d + ' (' + n + ')</text>';

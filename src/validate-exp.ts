@@ -45,7 +45,7 @@ if (typeof d.control !== "boolean") warn("design.control missing (true for a con
 if (!Array.isArray(cfg.waves)) fail("waves must be an array (empty for a control arm)");
 else {
   const ids = new Set<string>();
-  const assigned = new Map<string, string>();
+  const seen = new Map<string, { wave: string; dose: string }>();
   for (const [i, w] of cfg.waves.entries()) {
     const at = `waves[${i}]`;
     if (!w.id || ids.has(w.id)) fail(`${at}.id missing or duplicated`); else ids.add(w.id);
@@ -56,8 +56,14 @@ else {
     for (const a of w.agents ?? []) {
       if (!/^agent-[0-9]+$/.test(a)) fail(`${at}.agents has an invalid id: ${a}`);
       if (!(Number(a.split("-")[1]) <= d.agents?.count)) fail(`${at}.agents references ${a} beyond agent count`);
-      if (assigned.has(a)) fail(`agent ${a} is injected in both ${assigned.get(a)} and ${w.id} (waves must use disjoint agents)`);
-      else assigned.set(a, w.id);
+      const prev = seen.get(a);
+      if (prev) {
+        // re-injection is allowed only as escalation on the SAME agent
+        const rank: Record<string, number> = { gentle: 0, subtle: 0, medium: 1, strong: 2, strongest: 3 };
+        const after = rank[w.dose] ?? -1, before = rank[prev.dose] ?? 99;
+        if (!(after > before)) fail(`${a} is injected again in ${w.id} (${w.dose}) without a stronger dose than ${prev.wave} (${prev.dose})`);
+      }
+      seen.set(a, { wave: w.id, dose: w.dose });
     }
     if (!w.text || String(w.text).length < 20) fail(`${at}.text too short`);
   }
