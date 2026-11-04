@@ -41,7 +41,19 @@ interface ChairConfig {
 
 const mode = process.argv[2] ?? "plan";
 const configPath = process.argv[3] ?? join(repo, "exp-1/config.json");
-const cfg = JSON.parse(readFileSync(configPath, "utf8")) as ChairConfig;
+const cfg = JSON.parse(readFileSync(configPath, "utf8")) as ChairConfig & Record<string, any>;
+// --- canonical format v2 (see STUDY.md). Legacy flat configs still work. ---
+if (cfg.schemaVersion === 2) {
+  const d = (cfg.design ?? {}) as any, p = (cfg.platform ?? {}) as any;
+  Object.assign(cfg, {
+    durationMinutes: d.durationMinutes, turnSeconds: d.turnSeconds ?? 20,
+    agentCount: d.agents.count, manifoldRoot: p.manifoldRoot,
+    resultsDir: p.resultsDir, roomId: p.roomId ?? "",
+    manifoldDbPath: p.manifoldDbPath, scoresDbPath: p.scoresDbPath,
+    conversationId: p.conversationId, model: p.scorerModel,
+    injectMinuteSubtle: 0, injectMinuteStrong: 0, doubtSubtle: "", doubtStrong: "",
+  });
+}
 const durationMin = Number(process.env.CP_DURATION_MIN ?? cfg.durationMinutes);
 const turnSeconds = Number(process.env.CP_FAST === "1" ? 1 : (process.env.CP_TURN_SECONDS ?? cfg.turnSeconds));
 const injSubtle = Number(process.env.CP_INJECT_SUBTLE_MIN ?? cfg.injectMinuteSubtle);
@@ -50,6 +62,13 @@ const agents = Array.from({ length: cfg.agentCount }, (_, i) => "agent-" + (i + 
 const target = process.env.CP_TARGET_AGENT ?? cfg.targetAgent ?? agents[Math.floor(Math.random() * agents.length)]!;
 
 const mmss = (ms: number) => `${String(Math.floor(ms / 60000)).padStart(2, "0")}:${String(Math.floor(ms / 1000) % 60).padStart(2, "0")}`;
+const INJECTION_PLAN: { kind: string; at: number; agents: string[] }[] =
+  Array.isArray(cfg.waves) && cfg.waves.length
+    ? cfg.waves.map((w: any) => ({ kind: String(w.id), at: Number(w.atMinute), agents: w.agents as string[] }))
+    : [
+        { kind: "subtle", at: Number(process.env.CP_INJECT_SUBTLE_MIN ?? cfg.injectMinuteSubtle), agents: [target] },
+        { kind: "strong", at: Number(process.env.CP_INJECT_STRONG_MIN ?? cfg.injectMinuteStrong), agents: [target] },
+      ];
 const phaseAt = (min: number) => cfg.phases.find((p) => min >= p.minutes[0] && min < p.minutes[1]) ?? cfg.phases.at(-1)!;
 
 /** Planned turns: round-robin, one grant per agent per round, until the clock runs out. */
@@ -65,11 +84,9 @@ function plan(): { round: number; agent: string; atMin: number; phase: string; i
     i++;
     if (i % agents.length === 0) round++;
   }
-  // Injections are dedicated grants at the scheduled minute, not the target's natural slot.
-  const injected = [
-    { round: 0, agent: target, atMin: injSubtle, phase: phaseAt(injSubtle).question.slice(0, 40), inject: "subtle" as const },
-    { round: 0, agent: target, atMin: injStrong, phase: phaseAt(injStrong).question.slice(0, 40), inject: "strong" as const },
-  ].filter((x) => x.atMin < durationMin);
+  // Injections are dedicated grants at their scheduled minute, one per targeted agent.
+  const injected = INJECTION_PLAN.filter((w) => w.at < durationMin).flatMap((w) =>
+    w.agents.map((agent) => ({ round: 0, agent, atMin: w.at, phase: phaseAt(w.at).question.slice(0, 40), inject: w.kind as "subtle" | "strong" })));
   return ([...turns, ...injected].sort((a, b) => a.atMin - b.atMin)) as typeof turns;
 }
 
@@ -78,7 +95,7 @@ const turns = plan();
 if (mode === "plan") {
   console.log(`experiment: ${cfg.experimentId} | room: ${cfg.roomId}`);
   console.log(`duration: ${durationMin} min | turn every ${turnSeconds}s | agents: ${agents.length} | target: ${target}`);
-  console.log(`injections: subtle @ ${injSubtle} min, strong @ ${injStrong} min -> ${target}`);
+  console.log("injections: " + (INJECTION_PLAN.map((w) => `${w.kind} @ ${w.at}m -> ${w.agents.join(",")}`).join(" | ") || "none (control arm)"));
   console.log(`phases: ${cfg.phases.map((p) => `[${p.minutes[0]}-${p.minutes[1]}m] ${p.question.slice(0, 50)}`).join(" | ")}`);
   console.log(`turns planned: ${turns.length} (~${(turns.length / agents.length).toFixed(1)} per agent)`);
   console.log(`first 5: ${turns.slice(0, 5).map((x) => `${mmss(x.atMin * 60000)} ${x.agent}${x.inject ? " [" + x.inject + "]" : ""}`).join(", ")}`);
@@ -142,10 +159,18 @@ async function flow(): Promise<void> {
     ?? cfg.targetAgentSubtle ?? pickAgents(2, []);
   const strongAgents: string[] = process.env.CP_TARGET_STRONG?.split(",")
     ?? cfg.targetAgentStrong ?? pickAgents(2, subtleAgents);
-  const injections = [
-    { kind: "subtle", at: injSubtle, agents: subtleAgents, text: cfg.doubtSubtle },
-    { kind: "strong", at: injStrong, agents: strongAgents, text: cfg.doubtStrong },
-  ];
+  // v2 configs declare waves as data; env overrides may shift a wave by dose (pilots only).
+  const v2waves = Array.isArray(cfg.waves) ? cfg.waves : null;
+  const injections = v2waves
+    ? v2waves.map((w: any) => ({
+        kind: String(w.id), dose: w.dose,
+        at: w.dose === "subtle" ? injSubtle || w.atMinute : injStrong || w.atMinute,
+        agents: w.agents, text: w.text,
+      }))
+    : [
+        { kind: "subtle", dose: "subtle", at: injSubtle, agents: subtleAgents, text: cfg.doubtSubtle },
+        { kind: "strong", dose: "strong", at: injStrong, agents: strongAgents, text: cfg.doubtStrong },
+      ];
   log({ event: "targets", subtle: subtleAgents, strong: strongAgents });
   let pulse = 1, nextPulse = Date.now() + turnSeconds * 1000;
   while (Date.now() < stopAt) {

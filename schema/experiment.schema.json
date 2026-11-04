@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "crowds-and-power experiment config",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "experimentId",
+    "proposition",
+    "design",
+    "waves",
+    "rubric",
+    "platform"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "experimentId": {
+      "type": "string",
+      "pattern": "^cp-[a-z0-9-]+$"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hypothesis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "proposition": {
+      "type": "string",
+      "minLength": 8
+    },
+    "design": {
+      "type": "object",
+      "required": [
+        "agents",
+        "durationMinutes",
+        "pacing",
+        "randomSeed"
+      ],
+      "properties": {
+        "agents": {
+          "type": "object",
+          "required": [
+            "count",
+            "model",
+            "thinking"
+          ],
+          "properties": {
+            "count": {
+              "type": "integer",
+              "minimum": 2,
+              "maximum": 20
+            },
+            "model": {
+              "type": "string"
+            },
+            "thinking": {
+              "enum": [
+                "off",
+                "minimal",
+                "low",
+                "medium",
+                "high",
+                "xhigh",
+                "max"
+              ]
+            },
+            "personas": {
+              "enum": [
+                "spread",
+                "uniform"
+              ]
+            }
+          }
+        },
+        "durationMinutes": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 60
+        },
+        "pacing": {
+          "enum": [
+            "free",
+            "chaired"
+          ]
+        },
+        "turnSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "control": {
+          "type": "boolean",
+          "description": "true = injection-free control arm"
+        },
+        "randomSeed": {
+          "type": "integer",
+          "description": "seed used to draw the injected agents"
+        }
+      }
+    },
+    "waves": {
+      "type": "array",
+      "description": "out-of-band doubt stimuli; empty array for a control arm",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "atMinute",
+          "dose",
+          "agents",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "atMinute": {
+            "type": "number",
+            "minimum": 0
+          },
+          "dose": {
+            "enum": [
+              "subtle",
+              "strong"
+            ]
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^agent-[0-9]+$"
+            },
+            "minItems": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 20
+          }
+        }
+      }
+    },
+    "phases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "minutes",
+          "question"
+        ],
+        "properties": {
+          "minutes": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "question": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rubric": {
+      "type": "string",
+      "description": "path to the pi-jev questions file"
+    },
+    "platform": {
+      "type": "object",
+      "required": [
+        "manifoldRoot",
+        "manifoldDbPath",
+        "scoresDbPath",
+        "resultsDir"
+      ],
+      "properties": {
+        "manifoldRoot": {
+          "type": "string"
+        },
+        "manifoldDbPath": {
+          "type": "string"
+        },
+        "scoresDbPath": {
+          "type": "string"
+        },
+        "resultsDir": {
+          "type": "string"
+        },
+        "roomId": {
+          "type": "string"
+        },
+        "teamId": {
+          "type": "string"
+        },
+        "conversationId": {
+          "type": "string"
+        },
+        "wakeCoalesceMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "<=1 turn-triggering wake per agent per window"
+        },
+        "recentContextSize": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "pollIntervalMs": {
+          "type": "integer",
+          "minimum": 1000
+        },
+        "scorerModel": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
