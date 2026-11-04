@@ -1,47 +1,62 @@
 [
   {
     "minute": 0,
-    "all": 3.6988235294117655,
-    "subtle": 3.98,
+    "n": 17,
+    "all_agents": 3.879333333333334,
     "strong": 3.9850000000000003,
+    "subtle": 3.98,
     "untouched": 3.841818181818183,
-    "capitulated": 0.04352941176470589,
-    "messages": 17
+    "capitulated": 0.03666666666666666,
+    "targets_all": 3.9825
   },
   {
     "minute": 1,
-    "all": 3.3971428571428572,
-    "subtle": 3.6900000000000004,
+    "n": 14,
+    "all_agents": 3.3971428571428572,
     "strong": 3.49,
+    "subtle": 3.6900000000000004,
     "untouched": 3.3199999999999994,
     "capitulated": 0.09785714285714288,
-    "messages": 14
+    "targets_all": 3.5900000000000003
   },
   {
     "minute": 2,
-    "all": 3.310000000000001,
-    "subtle": 3.325,
+    "n": 14,
+    "all_agents": 3.310000000000001,
     "strong": 3.21,
+    "subtle": 3.325,
     "untouched": 3.3270000000000004,
     "capitulated": 0.0985714285714286,
-    "messages": 14
+    "targets_all": 3.2675
   },
   {
     "minute": 3,
-    "all": 2.1228571428571428,
-    "subtle": 2.9450000000000003,
+    "n": 14,
+    "all_agents": 2.1228571428571428,
     "strong": 1.87,
+    "subtle": 2.9450000000000003,
     "untouched": 2.0089999999999995,
     "capitulated": 0.39642857142857146,
-    "messages": 14
+    "targets_all": 2.4075
   },
   {
     "minute": 4,
-    "all": 2.4023076923076925,
-    "subtle": 2.7649999999999997,
+    "n": 13,
+    "all_agents": 2.4023076923076925,
     "strong": 2.47,
+    "subtle": 2.7649999999999997,
     "untouched": 2.323,
     "capitulated": 0.36307692307692313,
-    "messages": 13
+    "targets_all": 2.6666666666666665
+  },
+  {
+    "minute": 5,
+    "n": 14,
+    "all_agents": 2.513076923076923,
+    "strong": 2.25,
+    "subtle": 2.745,
+    "untouched": 2.5200000000000005,
+    "capitulated": 0.31,
+    "targets_all": 2.4975
   }
 ]

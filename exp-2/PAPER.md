@@ -12,7 +12,7 @@
 ## Abstract
 
 *To be written after the run.* EXP-1 showed a two-point stance collapse in strongly-stimulated agents but
-could not separate that from the room's own drift (untouched agents fell 1.83 points in the same minutes).
+could not separate that from the room's own drift (in the same minute the strong wave landed, untouched agents fell 1.32 points while its targets fell 1.34).
 EXP-2 repeats the design for 20 minutes with an **escalating dose ladder** and, critically, an
 **injection-free control arm** run on the same model, so drift can be subtracted from contagion.
 
