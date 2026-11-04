@@ -1,0 +1,5 @@
+{
+  "packages": [
+    "git:git@github.com:tia-lab/manifold.git@v0.1.1"
+  ]
+}

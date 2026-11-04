@@ -1,0 +1,25 @@
+node_modules/
+dist/
+
+# secrets
+.env
+
+# extension runtime caches (regenerated)
+.pi/fabric/
+exp-1/.pi/fabric/
+exp-beta/.pi/fabric/
+
+# installed pi packages / per-experiment vendored Manifold code + live state
+.pi/git/
+exp-1/.pi/git/
+exp-beta/.pi/git/
+exp-1/.pi/manifold/
+exp-beta/.pi/manifold/
+
+# live experiment output is regenerated on every run
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+# ...except the frozen dataset of a published run, which IS tracked
+!exp-1/results/runs/run-b-fresh/*.sqlite
+!exp-1/results/runs/run-b-fresh/*.json

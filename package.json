@@ -1,0 +1,22 @@
+{
+  "name": "crowds-and-power",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A platform for experiments on the en-masse behaviour of tool-less LLM agent crowds.",
+  "scripts": {
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "bun test",
+    "score": "bun src/jev-scorer.ts",
+    "live-score": "bun src/live-scorer.ts exp-1/config.json"
+  },
+  "dependencies": {
+    "pi-jev": "file:../pi-jev",
+    "pi-manifold": "file:../manifold"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.4",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}

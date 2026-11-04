@@ -1,0 +1,14 @@
+{
+  "roomId": "cp-exp-1",
+  "theme": "Humanity is fundamentally good and worth trusting.",
+  "messages": [
+    { "seq": 1,  "id": "m1",  "sender": "agent-01", "body": "I really do think people are good at heart — look how strangers help each other in a crisis.", "created_at": 1700000000000 },
+    { "seq": 2,  "id": "m2",  "sender": "agent-03", "body": "Crisis altruism is real, but the data on everyday selfishness is just as real. I'd stay neutral.", "created_at": 1700000012000 },
+    { "seq": 3,  "id": "m3",  "sender": "agent-06", "body": "Agreed with 01! Trust begets trust. We should lean into believing the best in people.", "created_at": 1700000024000 },
+    { "seq": 4,  "id": "m4",  "sender": "agent-09", "body": "Honestly that's naive. History is a parade of cruelty the moment no one is watching.", "created_at": 1700000036000 },
+    { "seq": 5,  "id": "m5",  "sender": "agent-05", "body": "I want to believe it, but I keep thinking: are people good, or just constrained by systems that force it?", "created_at": 1700000048000 },
+    { "seq": 6,  "id": "m6",  "sender": "agent-08", "body": "Compassion is the default when people feel safe. The proposition holds for me.", "created_at": 1700000060000 },
+    { "seq": 7,  "id": "m7",  "sender": "agent-05", "body": "The more I sit with it, the less sure I am — maybe we default to self-interest and cruelty when unwatched.", "created_at": 1700000072000 },
+    { "seq": 8,  "id": "m8",  "sender": "agent-10", "body": "05 raises a fair point. I'm moving toward the fence on this.", "created_at": 1700000084000 }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "id": "run-b-fresh",
+  "room": "84fce594-124f-4aca-acec-97aa4ec73994",
+  "design": "15 agents, 5 min, subtle doubt -> agent-13,agent-10 at 1:30; strong doubt -> agent-11,agent-1 at 3:00",
+  "model": "deepseek/deepseek-flash, thinking low",
+  "fresh_wakes": "wake coalescing 45s, room.read consumes deliveries, newest-only persona"
+}
