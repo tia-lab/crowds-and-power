@@ -1,0 +1,33 @@
+{
+  "format": 1,
+  "revisionFormat": 2,
+  "entries": {
+    "topology/peer-seq": {
+      "key": "topology/peer-seq",
+      "value": {
+        "format": 1,
+        "next": 1
+      },
+      "version": 1,
+      "updatedAt": 1793808952950,
+      "updatedBy": {
+        "id": "session:01a1a758-577b-76ad-a4a0-961490e19172",
+        "name": "main",
+        "kind": "main",
+        "sessionId": "01a1a758-577b-76ad-a4a0-961490e19172"
+      }
+    }
+  },
+  "highWater": 45,
+  "versions": {
+    "topology/peer-seq": 1,
+    "sessions/01a1a758-577b-76ad-a4a0-961490e19172": 15,
+    "topology/participants/8138325bb5ffffec8f3c45b1cb28aded8dbe3291e277c68c4a37dfa03be0307d": 17,
+    "topology/hosts/8138325bb5ffffec8f3c45b1cb28aded8dbe3291e277c68c4a37dfa03be0307d": 18
+  },
+  "tombstoneOrder": [
+    "sessions/01a1a758-577b-76ad-a4a0-961490e19172",
+    "topology/participants/8138325bb5ffffec8f3c45b1cb28aded8dbe3291e277c68c4a37dfa03be0307d",
+    "topology/hosts/8138325bb5ffffec8f3c45b1cb28aded8dbe3291e277c68c4a37dfa03be0307d"
+  ]
+}

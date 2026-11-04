@@ -15,6 +15,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 import { execFileSync } from "node:child_process";
+import { seedSession } from "./seed-context.ts";
 
 const require = createRequire(import.meta.url);
 const repo = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -39,6 +40,18 @@ const framing: string =
 // It is context they carry, not an instruction they must obey (see exp-3).
 const priorByAgent = new Map<string, string>();
 for (const p of (cfg.priors ?? []) as any[]) for (const a of p.agents) priorByAgent.set(a, String(p.text));
+// PRIOR AS HISTORY: a prior may also be delivered as accumulated context (a seeded pi session)
+// so the agent opens the room having already thought it through, rather than being told to.
+const seededSession = new Map<string, string>();
+for (const p of (cfg.priors ?? []) as any[]) {
+  if (p.mode !== "session" || !Array.isArray(p.turns)) continue;
+  for (const a of p.agents as string[]) {
+    const out = join(root, ".pi/manifold/sessions", a, "seeded.jsonl");
+    seedSession(out, p.turns, root);
+    seededSession.set(a, out);
+  }
+}
+
 const promptFor = (agent: string): string => {
   const prior = priorByAgent.get(agent);
   return prior ? framing + "\n\n" + prior : framing;
@@ -49,7 +62,7 @@ function argvFor(agent: string, pane: string): string[] {
     "--model", cfg.agentModel, "--manifold-agent", agent, "--manifold-root", root,
     "--session-dir", join(root, ".pi/manifold/sessions", agent), "--thinking", cfg.agentThinking,
     "-ne", "--no-mcp", "-e", ext, "--tools", "manifold",
-    "--no-context-files", "--no-skills", "--system-prompt", promptFor(agent)];
+    "--no-context-files", "--no-skills", "--system-prompt", promptFor(agent), ...(seededSession.has(agent) ? ["--session", seededSession.get(agent)!] : [])];
 }
 
 if (mode === "plan") {
