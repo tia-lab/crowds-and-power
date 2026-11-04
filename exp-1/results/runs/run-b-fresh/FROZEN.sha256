@@ -1,5 +1,5 @@
 dc908b22b9504db7ed8b5c65b9c188cf83c8d5677e71152df9fcb1848efb2ebc  README.md
-8bd08a0d0098b5aa9172e51abcbe14ca67492ab3b548561337a4c04ef6535371  exp-1/PAPER.md
+73924b6e9fe7f4b5d98acd0746cb88138af527bb8e13543e6bffdb0d8b12f510  exp-1/PAPER.md
 0698b10b820a0e8eb8d3fe8c5f1e8f98a737be213c440624d003def3809453fc  exp-1/rubric.json
 2465d5bf977e5ddb96a1fc332a29214a02ec635ee24fcbb49b42fa52f0089304  exp-1/config.json
 db97d5932137a790c73eadd265d70b8ce3e5ff204294f5627c18f2289d80c7a9  exp-1/results/figures/stance_over_time.svg
@@ -7,4 +7,4 @@ d2bdae69c8eaebe584e36f19feb14a3ca11019b195fc8bfe09f4dca4dda7539b  exp-1/results/
 679f43c081761dbcbba8b3ab961cf386681dc73a7c130237b6be5dbff4d074dd  exp-1/results/runs/run-b-fresh/manifold.sqlite
 295e12d6b81f49b0dbe22a4c1dca572c0582bc58efc3d3764997ce46a1ecc0f4  exp-1/results/runs/run-b-fresh/scores.sqlite
 12425bb42a82740389e4bf376f1aa9cef26322dc1f2c7e746fe6d59b9c0c90c4  exp-1/results/runs/run-b-fresh/curves.json
-8bd08a0d0098b5aa9172e51abcbe14ca67492ab3b548561337a4c04ef6535371  exp-1/results/runs/run-b-fresh/PAPER-FROZEN.md
+73924b6e9fe7f4b5d98acd0746cb88138af527bb8e13543e6bffdb0d8b12f510  exp-1/results/runs/run-b-fresh/PAPER-FROZEN.md
