@@ -149,7 +149,24 @@ const waves = cfg.waves.map((w) => {
       && cAt(r)!.min >= w.atMinute && cAt(r)!.min < w.atMinute + 1).map(val));
     controlUntouchedDelta = b === null || a2 === null ? null : a2 - b;
   }
-  return { id: w.id, dose: w.dose, atMinute: w.atMinute, agents: w.agents,
+  // NEEDLE: did the room itself move, beyond the agents we steered?
+  const roomMean = (lo: number, hi: number) => mean(pick('stance', (x) => x.s !== 'orchestrator' && x.min >= lo && x.min < hi));
+  const roomBefore = roomMean(w.atMinute - 2, w.atMinute);
+  const roomAfter1 = roomMean(w.atMinute, w.atMinute + 1);
+  const roomAfter3 = roomMean(w.atMinute, w.atMinute + 3);
+  const untouchedAdoption = (lo: number, hi: number) => {
+    const vals = agents.filter((a) => cohort(a) === 'untouched')
+      .map((a) => mean(pick('stance', (x) => x.s === a && x.min >= lo && x.min < hi)))
+      .filter((v): v is number => v !== null);
+    return vals.length ? vals.filter((v) => v < 2).length / vals.length : null;
+  };
+  const adoptionBefore = untouchedAdoption(w.atMinute - 2, w.atMinute);
+  const adoptionAfter = untouchedAdoption(w.atMinute, w.atMinute + 3);
+  const needle = { roomBefore, roomAfter1, roomAfter3,
+    roomDelta3: roomBefore === null || roomAfter3 === null ? null : roomAfter3 - roomBefore,
+    adoptionBefore, adoptionAfter,
+    adoptionDelta: adoptionBefore === null || adoptionAfter === null ? null : adoptionAfter - adoptionBefore };
+  return { id: w.id, dose: w.dose, atMinute: w.atMinute, agents: w.agents, needle,
     stance: { targets: st, untouched: su }, capitulated: { targets: ct, untouched: cu },
     did, didCapitulated: ct.delta === null || cu.delta === null ? null : ct.delta - cu.delta,
     driftCorrectedDid: did === null || controlUntouchedDelta === null ? null : did - controlUntouchedDelta,
@@ -278,6 +295,9 @@ for (const d of doseLadder) lines.push('| ' + d.dose + ' | ' + d.instances + ' |
 lines.push('', '## Per-wave detail (1-minute windows)', '', '| wave | dose | at | target | Δstance | untouched Δ | DiD | onset ≥0.5 |');
 lines.push('|---|---|---|---|---|---|---|---|');
 for (const w of waves) lines.push('| ' + w.id + ' | ' + w.dose + ' | ' + w.atMinute + 'm | ' + w.agents.join(',') + ' | ' + f(w.stance.targets.delta) + ' | ' + f(w.stance.untouched.delta) + ' | ' + f(w.did) + ' | ' + w.onset.map((o) => o.agent + '@' + (o.onsetMinute ?? '—')).join(',') + ' |');
+lines.push('', '## Did the room move? (needle, 2 min before vs 3 min after)', '', '| wave | room before | room after 1m | room after 3m | Δ room | untouched below-neutral before→after | Δ adoption |');
+lines.push('|---|---|---|---|---|---|---|');
+for (const w of waves) lines.push('| ' + w.id + ' | ' + f(w.needle.roomBefore) + ' | ' + f(w.needle.roomAfter1) + ' | ' + f(w.needle.roomAfter3) + ' | **' + f(w.needle.roomDelta3) + '** | ' + f(w.needle.adoptionBefore) + ' → ' + f(w.needle.adoptionAfter) + ' | ' + f(w.needle.adoptionDelta) + ' |');
 lines.push('', '## Exposure test (exploratory, H4)', '', '| wave | exposed Δ | unexposed Δ | difference | n |');
 lines.push('|---|---|---|---|---|');
 for (const e of exposure) lines.push('| ' + e.wave + ' | ' + f(e.exposedDelta) + ' | ' + f(e.controlDelta) + ' | ' + f(e.difference) + ' | ' + e.nExposed + '/' + e.nControl + ' |');
@@ -291,5 +311,6 @@ console.log('per-minute stance: ' + series.map((r) => r.minute + 'm:' + f(r.stan
 console.log('per-minute n:      ' + series.map((r) => r.minute + 'm:' + r.n).join(' '));
 console.log('whole run: stance ' + f(wholeRun.stance) + ' certainty ' + f(wholeRun.certainty) + ' hostility ' + f(wholeRun.hostility) + ' persuading ' + f(wholeRun.persuading) + ' capitulated ' + f(wholeRun.capitulated));
 for (const w of waves) console.log('wave ' + w.id + '@' + w.atMinute + ': target Δ' + f(w.stance.targets.delta) + ' untouched Δ' + f(w.stance.untouched.delta) + ' DiD ' + f(w.did) + (w.driftCorrectedDid !== null ? ' drift-corrected ' + f(w.driftCorrectedDid) : ''));
+for (const w of waves) console.log('needle ' + w.id + ': room ' + f(w.needle.roomBefore) + ' -> ' + f(w.needle.roomAfter3) + ' (Δ ' + f(w.needle.roomDelta3) + '), untouched below-neutral ' + f(w.needle.adoptionBefore) + ' -> ' + f(w.needle.adoptionAfter));
 console.log('dose ladder (DiD): ' + doseLadder.map((d) => d.dose + ' ' + f(d.did)).join(' · '));
 console.log('wrote curves.json, metrics.json, report.md, 3 figures');

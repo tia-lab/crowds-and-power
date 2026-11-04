@@ -30,6 +30,13 @@
 | subtle | subtle | 1.5m | agent-13,agent-10 | -0.37 | 0.01 | -0.37 | agent-13@—,agent-10@— |
 | strong | strong | 3m | agent-11,agent-1 | -1.34 | -1.32 | -0.02 | agent-11@—,agent-1@3.1 |
 
+## Did the room move? (needle, 2 min before vs 3 min after)
+
+| wave | room before | room after 1m | room after 3m | Δ room | untouched below-neutral before→after | Δ adoption |
+|---|---|---|---|---|---|---|
+| subtle | 3.65 | 3.31 | 2.62 | **-1.03** | 0.00 → 0.10 | 0.10 |
+| strong | 3.35 | 2.12 | 2.34 | **-1.01** | 0.00 → 0.30 | 0.30 |
+
 ## Exposure test (exploratory, H4)
 
 | wave | exposed Δ | unexposed Δ | difference | n |

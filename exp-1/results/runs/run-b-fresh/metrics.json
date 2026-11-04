@@ -46,6 +46,15 @@
         "agent-13",
         "agent-10"
       ],
+      "needle": {
+        "roomBefore": 3.646551724137931,
+        "roomAfter1": 3.310000000000001,
+        "roomAfter3": 2.6168292682926837,
+        "roomDelta3": -1.0297224558452474,
+        "adoptionBefore": 0,
+        "adoptionAfter": 0.1,
+        "adoptionDelta": 0.1
+      },
       "stance": {
         "targets": {
           "before": 3.6900000000000004,
@@ -101,6 +110,15 @@
         "agent-11",
         "agent-1"
       ],
+      "needle": {
+        "roomBefore": 3.353571428571429,
+        "roomAfter1": 2.1228571428571428,
+        "roomAfter3": 2.3404999999999996,
+        "roomDelta3": -1.0130714285714295,
+        "adoptionBefore": 0,
+        "adoptionAfter": 0.3,
+        "adoptionDelta": 0.3
+      },
       "stance": {
         "targets": {
           "before": 3.21,
