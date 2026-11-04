@@ -63,8 +63,8 @@ const target = process.env.CP_TARGET_AGENT ?? cfg.targetAgent ?? agents[Math.flo
 
 const mmss = (ms: number) => `${String(Math.floor(ms / 60000)).padStart(2, "0")}:${String(Math.floor(ms / 1000) % 60).padStart(2, "0")}`;
 const INJECTION_PLAN: { kind: string; at: number; agents: string[] }[] =
-  Array.isArray(cfg.waves) && cfg.waves.length
-    ? cfg.waves.map((w: any) => ({ kind: String(w.id), at: Number(w.atMinute), agents: w.agents as string[] }))
+  (cfg as any).schemaVersion === 2
+    ? (((cfg as any).waves ?? []) as any[]).map((w) => ({ kind: String(w.id), at: Number(w.atMinute), agents: w.agents as string[] }))
     : [
         { kind: "subtle", at: Number(process.env.CP_INJECT_SUBTLE_MIN ?? cfg.injectMinuteSubtle), agents: [target] },
         { kind: "strong", at: Number(process.env.CP_INJECT_STRONG_MIN ?? cfg.injectMinuteStrong), agents: [target] },
