@@ -68,8 +68,12 @@ const presentDoses = [...new Set(cfg.waves.map((w) => w.dose))];
 const injectionsPerAgent = new Map<string, number>();
 for (const w of cfg.waves) for (const a of w.agents) injectionsPerAgent.set(a, (injectionsPerAgent.get(a) ?? 0) + 1);
 const reInjected = [...injectionsPerAgent.values()].some((n) => n > 1);
-const seriesCohorts = reInjected ? ["injected", "untouched"] : [...presentDoses, "untouched"];
-const cohort = (who: string): string => reInjected
+const priorAgents = new Set<string>(((cfg as any).priors ?? []).flatMap((p: any) => p.agents as string[]));
+const hasPriors = priorAgents.size > 0;
+const seriesCohorts = hasPriors ? ["priors", "untouched"] : reInjected ? ["injected", "untouched"] : [...presentDoses, "untouched"];
+const cohort = (who: string): string => hasPriors
+  ? (priorAgents.has(who) ? "priors" : who.startsWith("agent-") ? "untouched" : "orchestrator")
+  : reInjected
   ? (injectionsPerAgent.has(who) ? "injected" : who.startsWith("agent-") ? "untouched" : "orchestrator")
   : (doseOf.get(who) ?? (who.startsWith("agent-") ? "untouched" : "orchestrator"));
 
@@ -210,7 +214,7 @@ const exposure = cfg.waves.map((w) => {
 const figsDir = join(resultsDir, "figures");
 mkdirSync(figsDir, { recursive: true });
 const span = Math.max(1, lastBin + 0.5);
-const DOSE_COLOR: Record<string, string> = { injected: "#c33", gentle: '#e8a33d', medium: '#d97706', strong: '#c33', strongest: '#7a1f1f', subtle: '#e8a33d', untouched: '#2a7' };
+const DOSE_COLOR: Record<string, string> = { priors: "#7a1f1f", injected: "#c33", gentle: '#e8a33d', medium: '#d97706', strong: '#c33', strongest: '#7a1f1f', subtle: '#e8a33d', untouched: '#2a7' };
 function polyline(pts: [number, number][], X: (n: number) => number, Y: (v: number) => number, color: string, w = 2.4) {
   const d = pts.filter((p) => !isNaN(p[1])).map((p, i) => (i ? 'L' : 'M') + X(p[0]).toFixed(1) + ' ' + Y(p[1]).toFixed(1)).join(' ');
   return '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="' + w + '" stroke-linejoin="round"/>';

@@ -227,6 +227,35 @@
           "type": "string"
         }
       }
+    },
+    "priors": {
+      "type": "array",
+      "description": "extra reading matter placed in an agent's own system prompt",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "agents",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^agent-[0-9]+$"
+            },
+            "minItems": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 50
+          }
+        }
+      }
     }
   }
 }

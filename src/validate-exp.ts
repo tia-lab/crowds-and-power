@@ -67,8 +67,24 @@ else {
     }
     if (!w.text || String(w.text).length < 20) fail(`${at}.text too short`);
   }
-  if (cfg.waves.length === 0 && d.control !== true) warn("no waves but design.control is not true");
+  if (cfg.waves.length === 0 && d.control !== true && !(cfg.priors && cfg.priors.length)) warn("no waves but design.control is not true");
   if (cfg.waves.length > 0 && d.control === true) warn("waves present but design.control is true");
+}
+
+// ---- priors (optional): extra reading matter in an agent's system prompt ----
+if (cfg.priors !== undefined) {
+  if (!Array.isArray(cfg.priors)) fail("priors must be an array");
+  else for (const [i, pr] of cfg.priors.entries()) {
+    const at = `priors[${i}]`;
+    if (!pr.id) fail(`${at}.id missing`);
+    if (!Array.isArray(pr.agents) || !pr.agents.length) fail(`${at}.agents must name at least one agent`);
+    for (const a of pr.agents ?? []) {
+      if (!/^agent-[0-9]+$/.test(a)) fail(`${at}.agents has an invalid id: ${a}`);
+      if (Number(a.split("-")[1]) > (d.agents?.count ?? 0)) fail(`${at} references ${a} beyond agent count`);
+      if (cfg.waves?.some((w: any) => w.agents.includes(a))) warn(`${a} carries a prior and is also a wave target`);
+    }
+    if (!pr.text || String(pr.text).length < 50) fail(`${at}.text must be substantial (>=50 chars)`);
+  }
 }
 
 // ---- rubric: the five core questions are mandatory for cross-study comparability ----

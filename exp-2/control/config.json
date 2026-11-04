@@ -62,12 +62,19 @@
     "manifoldDbPath": "/media/Development/AI/crowds-and-power/exp-2/control/.pi/manifold/state/manifold.sqlite",
     "scoresDbPath": "exp-2/control/results/scores.sqlite",
     "resultsDir": "exp-2/control/results",
-    "roomId": "",
-    "teamId": "",
+    "roomId": "a08ecefd-cf49-471f-bbda-346e93853f18",
+    "teamId": "ef49ea91-b66d-478a-acd9-c466fbcdd524",
     "conversationId": "cp-exp-2-control",
     "wakeCoalesceMs": 45000,
     "recentContextSize": 8,
     "pollIntervalMs": 12000,
     "scorerModel": "jev-latest"
-  }
+  },
+  "manifoldRoot": "/media/Development/AI/crowds-and-power/exp-2/control",
+  "resultsDir": "exp-2/control/results",
+  "roomId": "a08ecefd-cf49-471f-bbda-346e93853f18",
+  "agentCount": 15,
+  "agentModel": "deepseek/deepseek-flash",
+  "agentThinking": "low",
+  "teamId": "ef49ea91-b66d-478a-acd9-c466fbcdd524"
 }

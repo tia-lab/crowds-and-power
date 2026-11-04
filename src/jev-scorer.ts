@@ -96,6 +96,14 @@ interface FileConfig {
 if (import.meta.main) {
   const [configPath = "exp-1/config.json", mode = "batch"] = process.argv.slice(2);
   const cfg = JSON.parse(readFileSync(configPath, "utf8")) as FileConfig;
+// canonical v2 configs keep everything under platform; flatten for the scorers
+if ((cfg as any).schemaVersion === 2) {
+  const pl = (cfg as any).platform ?? {};
+  Object.assign(cfg as any, {
+    roomId: pl.roomId ?? "", manifoldDbPath: pl.manifoldDbPath, scoresDbPath: pl.scoresDbPath,
+    recentContextSize: pl.recentContextSize ?? 8, model: pl.scorerModel ?? "jev-latest",
+  });
+}
   const rubricPath = configPath.replace(/config\.json$/, "rubric.json");
   const rubric = JSON.parse(readFileSync(rubricPath, "utf8")) as Rubric;
   const scorerCfg: ScorerConfig = {

@@ -26,6 +26,14 @@ interface FileConfig {
 const configPath = process.argv[2] ?? "exp-1/config.json";
 const intervalMs = Number(process.argv[3] ?? 15_000);
 const cfg = JSON.parse(readFileSync(configPath, "utf8")) as FileConfig;
+// canonical v2 configs keep everything under platform; flatten for the scorers
+if ((cfg as any).schemaVersion === 2) {
+  const pl = (cfg as any).platform ?? {};
+  Object.assign(cfg as any, {
+    roomId: pl.roomId ?? "", manifoldDbPath: pl.manifoldDbPath, scoresDbPath: pl.scoresDbPath,
+    recentContextSize: pl.recentContextSize ?? 8, model: pl.scorerModel ?? "jev-latest",
+  });
+}
 // Rubric = sibling rubric.json of the config, or an explicit CP_RUBRIC path.
 const rubricPath = process.env.CP_RUBRIC ?? join(dirname(configPath), "rubric.json");
 const rubric = JSON.parse(readFileSync(rubricPath, "utf8")) as Rubric;
