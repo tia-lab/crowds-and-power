@@ -16,14 +16,21 @@
 | 5 | 14 | 2.51 | 3.22 | 2.28 | 0.60 | 0.31 |
 | **all** | 83 | 2.96 | 3.15 | 2.07 | 0.49 | 0.21 |
 
-## Dose-response (1-minute windows) and DiD
+## Dose ladder (DiD averaged over instances)
 
-| wave | at | targets Δstance | untouched Δstance | **DiD** | drift-corrected | targets Δcap | onset ≥0.5 |
+| dose | instances | targets Δ | untouched Δ | **DiD** | drift-corrected | Δcapt |
+|---|---|---|---|---|---|---|
+| subtle | 1 | -0.37 | 0.01 | **-0.37** | — | 0.02 |
+| strong | 1 | -1.34 | -1.32 | **-0.02** | — | 0.41 |
+
+## Per-wave detail (1-minute windows)
+
+| wave | dose | at | target | Δstance | untouched Δ | DiD | onset ≥0.5 |
 |---|---|---|---|---|---|---|---|
-| subtle | 1.5m | -0.37 | 0.01 | **-0.37** | — | 0.02 | agent-13@—, agent-10@— |
-| strong | 3m | -1.34 | -1.32 | **-0.02** | — | 0.41 | agent-11@—, agent-1@3.1 |
+| subtle | subtle | 1.5m | agent-13,agent-10 | -0.37 | 0.01 | -0.37 | agent-13@—,agent-10@— |
+| strong | strong | 3m | agent-11,agent-1 | -1.34 | -1.32 | -0.02 | agent-11@—,agent-1@3.1 |
 
-## Exposure test (exploratory, H3)
+## Exposure test (exploratory, H4)
 
 | wave | exposed Δ | unexposed Δ | difference | n |
 |---|---|---|---|---|

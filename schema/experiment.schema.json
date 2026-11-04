@@ -131,8 +131,11 @@
           },
           "dose": {
             "enum": [
-              "subtle",
-              "strong"
+              "gentle",
+              "medium",
+              "strong",
+              "strongest",
+              "subtle"
             ]
           },
           "agents": {

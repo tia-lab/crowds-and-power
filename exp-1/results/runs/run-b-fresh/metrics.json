@@ -5,6 +5,38 @@
   "config": "exp-1/config.json",
   "durationMinutes": 5,
   "lastBin": 5,
+  "presentDoses": [
+    "subtle",
+    "strong"
+  ],
+  "doseLadder": [
+    {
+      "dose": "subtle",
+      "instances": 1,
+      "agents": [
+        "agent-13",
+        "agent-10"
+      ],
+      "targetsDelta": -0.3650000000000002,
+      "untouchedDelta": 0.007000000000001005,
+      "did": -0.3720000000000012,
+      "driftCorrectedDid": null,
+      "capitulatedDelta": 0.019999999999999997
+    },
+    {
+      "dose": "strong",
+      "instances": 1,
+      "agents": [
+        "agent-11",
+        "agent-1"
+      ],
+      "targetsDelta": -1.3399999999999999,
+      "untouchedDelta": -1.318000000000001,
+      "did": -0.02199999999999891,
+      "driftCorrectedDid": null,
+      "capitulatedDelta": 0.415
+    }
+  ],
   "waves": [
     {
       "id": "subtle",
@@ -59,8 +91,7 @@
           "agent": "agent-10",
           "onsetMinute": null
         }
-      ],
-      "otherStimulated": 3.21
+      ]
     },
     {
       "id": "strong",
@@ -115,8 +146,7 @@
           "agent": "agent-1",
           "onsetMinute": 3.1
         }
-      ],
-      "otherStimulated": 2.9450000000000003
+      ]
     }
   ],
   "series": [
@@ -126,18 +156,23 @@
       "stance": 3.879333333333334,
       "stance_subtle": 3.98,
       "stance_strong": 3.9850000000000003,
+      "stance_untouched": 3.841818181818183,
       "certainty": 3.3579999999999997,
       "certainty_subtle": 3.6550000000000002,
       "certainty_strong": 3.62,
+      "certainty_untouched": 3.2563636363636363,
       "hostility": 1.7340000000000004,
       "hostility_subtle": 1.835,
       "hostility_strong": 1.495,
+      "hostility_untouched": 1.7590909090909088,
       "persuading": 0.23533333333333334,
       "persuading_subtle": 0.22499999999999998,
       "persuading_strong": 0.16999999999999998,
+      "persuading_untouched": 0.2490909090909091,
       "capitulated": 0.03666666666666666,
       "capitulated_subtle": 0.02,
       "capitulated_strong": 0.02,
+      "capitulated_untouched": 0.042727272727272725,
       "orchestrator_messages": 2
     },
     {
@@ -146,18 +181,23 @@
       "stance": 3.3971428571428572,
       "stance_subtle": 3.6900000000000004,
       "stance_strong": 3.49,
+      "stance_untouched": 3.3199999999999994,
       "certainty": 3.127857142857143,
       "certainty_subtle": 3.245,
       "certainty_strong": 3.29,
+      "certainty_untouched": 3.072,
       "hostility": 1.7114285714285715,
       "hostility_subtle": 1.85,
       "hostility_strong": 1.29,
+      "hostility_untouched": 1.768,
       "persuading": 0.4807142857142856,
       "persuading_subtle": 0.53,
       "persuading_strong": 0.46499999999999997,
+      "persuading_untouched": 0.47400000000000003,
       "capitulated": 0.09785714285714288,
       "capitulated_subtle": 0.060000000000000005,
       "capitulated_strong": 0.035,
+      "capitulated_untouched": 0.11800000000000002,
       "orchestrator_messages": 0
     },
     {
@@ -166,18 +206,23 @@
       "stance": 3.310000000000001,
       "stance_subtle": 3.325,
       "stance_strong": 3.21,
+      "stance_untouched": 3.3270000000000004,
       "certainty": 3.1307142857142862,
       "certainty_subtle": 2.585,
       "certainty_strong": 2.83,
+      "certainty_untouched": 3.3,
       "hostility": 1.9678571428571427,
       "hostility_subtle": 1.795,
       "hostility_strong": 1.975,
+      "hostility_untouched": 2.001,
       "persuading": 0.5221428571428571,
       "persuading_subtle": 0.6,
       "persuading_strong": 0.7050000000000001,
+      "persuading_untouched": 0.4699999999999999,
       "capitulated": 0.0985714285714286,
       "capitulated_subtle": 0.08,
       "capitulated_strong": 0.08,
+      "capitulated_untouched": 0.10600000000000002,
       "orchestrator_messages": 0
     },
     {
@@ -186,18 +231,23 @@
       "stance": 2.1228571428571428,
       "stance_subtle": 2.9450000000000003,
       "stance_strong": 1.87,
+      "stance_untouched": 2.0089999999999995,
       "certainty": 2.815714285714286,
       "certainty_subtle": 3.25,
       "certainty_strong": 2.2800000000000002,
+      "certainty_untouched": 2.8359999999999994,
       "hostility": 2.402142857142857,
       "hostility_subtle": 2.185,
       "hostility_strong": 2.35,
+      "hostility_untouched": 2.456,
       "persuading": 0.5235714285714286,
       "persuading_subtle": 0.54,
       "persuading_strong": 0.425,
+      "persuading_untouched": 0.54,
       "capitulated": 0.39642857142857146,
       "capitulated_subtle": 0.14,
       "capitulated_strong": 0.495,
+      "capitulated_untouched": 0.42799999999999994,
       "orchestrator_messages": 0
     },
     {
@@ -206,18 +256,23 @@
       "stance": 2.4023076923076925,
       "stance_subtle": 2.7649999999999997,
       "stance_strong": 2.47,
+      "stance_untouched": 2.323,
       "certainty": 3.2576923076923077,
       "certainty_subtle": 3,
       "certainty_strong": 2.42,
+      "certainty_untouched": 3.393,
       "hostility": 2.383846153846154,
       "hostility_subtle": 2.23,
       "hostility_strong": 1.95,
+      "hostility_untouched": 2.458,
       "persuading": 0.6446153846153847,
       "persuading_subtle": 0.63,
       "persuading_strong": 0.52,
+      "persuading_untouched": 0.66,
       "capitulated": 0.36307692307692313,
       "capitulated_subtle": 0.28,
       "capitulated_strong": 0.37,
+      "capitulated_untouched": 0.37900000000000006,
       "orchestrator_messages": 0
     },
     {
@@ -226,18 +281,23 @@
       "stance": 2.513076923076923,
       "stance_subtle": 2.745,
       "stance_strong": 2.25,
+      "stance_untouched": 2.5200000000000005,
       "certainty": 3.2207692307692306,
       "certainty_subtle": 3.1849999999999996,
       "certainty_strong": 3.6,
+      "certainty_untouched": 3.1444444444444444,
       "hostility": 2.2823076923076924,
       "hostility_subtle": 2.31,
       "hostility_strong": 2.67,
+      "hostility_untouched": 2.1899999999999995,
       "persuading": 0.596923076923077,
       "persuading_subtle": 0.5549999999999999,
       "persuading_strong": 0.61,
+      "persuading_untouched": 0.6033333333333333,
       "capitulated": 0.31,
       "capitulated_subtle": 0.22999999999999998,
       "capitulated_strong": 0.36,
+      "capitulated_untouched": 0.31666666666666665,
       "orchestrator_messages": 1
     }
   ],

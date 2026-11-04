@@ -51,7 +51,7 @@ else {
     if (!w.id || ids.has(w.id)) fail(`${at}.id missing or duplicated`); else ids.add(w.id);
     if (!(w.atMinute >= 0)) fail(`${at}.atMinute must be >= 0`);
     if (typeof d.durationMinutes === "number" && w.atMinute >= d.durationMinutes) fail(`${at}.atMinute is after the run ends`);
-    if (!["subtle", "strong"].includes(w.dose)) fail(`${at}.dose must be subtle|strong`);
+    if (!["gentle", "medium", "strong", "strongest", "subtle"].includes(w.dose)) fail(`${at}.dose must be subtle|strong`);
     if (!Array.isArray(w.agents) || w.agents.length === 0) fail(`${at}.agents must name at least one agent`);
     for (const a of w.agents ?? []) {
       if (!/^agent-[0-9]+$/.test(a)) fail(`${at}.agents has an invalid id: ${a}`);
