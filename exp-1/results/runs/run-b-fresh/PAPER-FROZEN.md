@@ -103,6 +103,7 @@ Everything is frozen and content-addressed; the table links to the actual object
 | [`run.json`](results/runs/run-b-fresh/run.json) | design snapshot: waves, agents, model, seed | 337 B | — |
 | [Figure 1](results/figures/stance_over_time.svg) | stance by cohort with wave markers | — | see manifest |
 | [Figure 2](results/figures/target_trajectories.svg) | per-message stance of the four injected agents | — | see manifest |
+| [Figure 3](results/figures/room_dimensions.svg) | room-level certainty, hostility, persuading, capitulated over time | — | see manifest |
 | [`PAPER-FROZEN.md`](results/runs/run-b-fresh/PAPER-FROZEN.md) | this paper as frozen with the run | — | — |
 | [`FROZEN.sha256`](results/runs/run-b-fresh/FROZEN.sha256) | manifest over all of the above | — | — |
 
@@ -137,6 +138,32 @@ Agent messages only (the orchestrator's 2 seed messages are excluded; including 
 
 ![stance over time](results/figures/stance_over_time.svg)
 
+### 3.2b The whole room, all five dimensions
+
+The per-cohort table above answers *who* moved. This is the crowd itself — every speaking agent, every
+minute, on all five annotations:
+
+| minute | n | stance (0–4) | certainty (0–4) | hostility (0–4) | persuading (0–1) | capitulated (0–1) |
+|---|---|---|---|---|---|---|
+| 0 | 15 | 3.88 | 3.36 | 1.73 | 0.24 | 0.04 |
+| 1 | 14 | 3.40 | 3.13 | 1.71 | 0.48 | 0.10 |
+| 2 | 14 | 3.31 | 3.13 | 1.97 | 0.52 | 0.10 |
+| **3** | 14 | **2.12** | **2.82** | **2.40** | 0.52 | **0.40** |
+| 4 | 13 | 2.40 | 3.26 | 2.38 | **0.64** | 0.36 |
+| 5 | 13 | 2.51 | 3.22 | 2.28 | 0.60 | 0.31 |
+| **whole run** | 83 | **2.96** | **3.15** | **2.07** | **0.49** | **0.21** |
+
+![room-level tone](results/figures/room_dimensions.svg)
+
+Three things only the crowd-level view shows:
+
+1. **The collapse cost the room its confidence, temporarily.** Certainty dips at minute 3 (3.36 → **2.82**)
+   exactly when stance falls, then recovers (3.26) while stance does not — the agents become doubtful,
+   then become sure again of a *different* position.
+2. **Hostility rises with the doubt.** 1.73 → **2.40** at the collapse and stays there (2.28 at 5 min);
+   the room does not just disagree, it sharpens.
+3. **Persuasion lags the collapse.** `persuading` is 0.24 before any stimulus, doubles by minute 1 (0.48) and
+   peaks at minute 4 (**0.64**), *after* the stance shift — the crowd argues once it has already moved.
 ### 3.3 Per-agent trajectories
 
 ![trajectories](results/figures/target_trajectories.svg)
